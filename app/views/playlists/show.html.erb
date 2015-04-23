@@ -6,19 +6,19 @@
   <div class="row">
     <div class="col-sm-5">
       <div id="user">
-        <% if @user.id == current_user.id %>
+        <% if @playlist.user.id == current_user.id %>
         <% else %>
           <% if @status == true %>
-            <%= link_to 'フォロー中', user_relationship_path(:user_id => @user.id), method: :delete, class: "btn btn-primary" %>
+            <%= link_to 'フォロー中', user_relationship_path(:user_id => @playlist.user.id), method: :delete, class: "btn btn-primary" %>
           <% else %>
-            <%= link_to 'フォローする', user_relationships_path(:user_id => @user.id), method: :post, class: "btn btn-primary" %>
+            <%= link_to 'フォローする', user_relationships_path(:user_id => @playlist.user.id), method: :post, class: "btn btn-primary" %>
           <% end %>
         <% end %>
       </div>
       <div class="panel panel-default">
         <div class="panel-heading">Making User</div>
         <div class="panel-body">
-          <%= link_to @user.name, user_path(:id => @user.id), id: :user %>
+          <%= link_to @playlist.user.name, user_path(:id => @playlist.user.id), id: :user %>
         </div>
 
         <div class="panel-heading">Genre</div>

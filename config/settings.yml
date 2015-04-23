@@ -1,0 +1,23 @@
+# config/settings.yml
+# development
+DB_DEV_USERNAME: your_db_username_for_development
+DB_DEV_PASSWORD: yout_db_pass_for_development
+DB_DEV_DATABASE: your_db_name_for_development
+
+# test
+DB_DEV_USERNAME: your_db_username_for_test
+DB_DEV_PASSWORD: yout_db_pass_for_test
+DB_DEV_DATABASE: your_db_name_for_test
+
+# production
+DB_DEV_USERNAME: your_db_username_for_production
+DB_DEV_DATABASE: your_db_name_for_production
+
+# config/environments/development.rb
+# user_name
+GMAIL: your_gmail_address
+GMAIL_PASS: your_gmail_pass
+
+# app/controllers/music_controller.rb
+# api
+API_KEY: your_youtube_api_key

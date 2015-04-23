@@ -16,27 +16,14 @@ class PlaylistsController < UsersController
 
   def index
     @playlists = Playlist.all.order("updated_at DESC")
-    @playlist_user_ids = @playlists.pluck(:user_id)
-    @user_name_array = Array.new
-    @playlist_user_ids.each do |user_id|
-      user_name = User.find(user_id).name
-      @user_name_array << user_name
-    end
   end
 
   def show
     @playlist = Playlist.find(params[:id])
-    @user = User.find(@playlist.user_id)
     @comments = Comment.where(playlist_id: params[:id])
-    @comment_user_ids = @comments.pluck(:user_id)
     ## @user_ids をわかりやすい命名に
     ### 変数多い
     #viewで使わない変数は＠をつけない
-    @user_name_array = Array.new
-    @comment_user_ids.each do |user_id|
-      user_name = User.find(user_id).name
-      @user_name_array << user_name
-    end
     @status = Relationship.where(follower_id: current_user.id, followed_id: @user.id).present?
     favorite = Favorite.new(playlist_id: params[:id], user_id: current_user.id)
     @condition = favorite.already_fav?
@@ -82,12 +69,6 @@ class PlaylistsController < UsersController
     follows = Relationship.where(follower_id: current_user.id).pluck(:followed_id)
     @follows = User.where(id: follows)
     @playlists = Playlist.where(user_id: follows).order("updated_at DESC").limit(20)
-    @playlist_user_ids = @playlists.pluck(:user_id)
-    @user_name_array = Array.new
-    @playlist_user_ids.each do |user_id|
-      user_name = User.find(user_id).name
-      @user_name_array << user_name
-    end
   end
 
   def genre
@@ -96,23 +77,12 @@ class PlaylistsController < UsersController
   def each_genre
     @genre = params[:id]
     @playlists = Playlist.where(genre: @genre)
-    @playlist_user_ids = @playlists.pluck(:user_id)
-    @user_name_array = Array.new
-    @playlist_user_ids.each do |user_id|
-      user_name = User.find(user_id).name
-      @user_name_array << user_name
-    end
   end
 
   ## ここにも怪しげなコードがあった
   def ranking
     @playlists = Playlist.ranking(params[:date], params[:genre])
     @playlist_user_ids = @playlists.pluck(:user_id)
-    @user_name_array = Array.new
-    @playlist_user_ids.each do |user_id|
-      user_name = User.find(user_id).name
-      @user_name_array << user_name
-    end
     playlist = Playlist.new
     #変なインスタンスメソッドを作って使用しているが、classを作ってやり直すのは時間かかるということでしのさんと話し、ここはそのままで。
     if params[:date].present?

@@ -92,10 +92,10 @@
           </ul>
           </li>
           <li>
-          <%= link_to 'お気に入り一覧', my_favorites_users_path %>
+          <%= link_to 'お気に入り一覧', favorites_user_path(id: current_user.id) %>
           </li>
           <li>
-          <%= link_to 'マイページ', mypage_users_path %>
+          <%= link_to 'マイページ', user_path(id: current_user.id) %>
           </li>
         </div>
       </div>

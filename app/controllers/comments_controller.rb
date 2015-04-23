@@ -4,13 +4,6 @@ class CommentsController < UsersController
   def index
     @playlist = Playlist.find_by(id: params[:playlist_id])
     @comments = Comment.where(playlist_id: params[:playlist_id])
-    @comment_user_ids = @comments.pluck(:user_id)
-    @user_name_array = Array.new
-    @comment_user_ids.each do |user_id|
-      @user_name = User.find(user_id).name
-      @user_name_array << @user_name
-    end
-
     render layout: false
   end
 
