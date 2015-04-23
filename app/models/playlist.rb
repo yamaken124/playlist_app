@@ -2,7 +2,7 @@ class Playlist < ActiveRecord::Base
   belongs_to :user
   has_many :comments
   has_many :favorites
-  has_many :urls
+  has_many :musics
   enum genre: %i(pops rock jazz classic others)
   validates :title, presence: true
 

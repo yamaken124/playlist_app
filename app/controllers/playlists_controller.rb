@@ -24,13 +24,12 @@ class PlaylistsController < UsersController
     ## @user_ids をわかりやすい命名に
     ### 変数多い
     #viewで使わない変数は＠をつけない
-    @status = Relationship.where(follower_id: current_user.id, followed_id: @user.id).present?
+    @status = Relationship.where(follower_id: current_user.id, followed_id: @playlist.user.id).present?
     favorite = Favorite.new(playlist_id: params[:id], user_id: current_user.id)
     @condition = favorite.already_fav?
     #インスタンスメソッドとレシーバを意識して、ここのメソッドを修正
-    @musics = Music.where(playlist_id: params[:id])
     music = Music.new(playlist_id: params[:id])
-    @http = music.http
+    @http = music.movie_http
   end
 
   def new
