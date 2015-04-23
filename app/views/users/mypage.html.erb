@@ -1,0 +1,25 @@
+<h2>マイページ</h2>
+
+<%= render 'profile' %>
+    </div>
+
+<div class="col-sm-6">
+  <ul class="list-group">
+    <li class="list-group-item">
+    <span class="badge"><%= @follower_amount %></span>
+    <%= link_to 'follow', my_follow_user_path(id: current_user.id) %>
+    </li>
+    <li class="list-group-item">
+    <span class="badge"><%= @followed_amount %></span>
+    <%= link_to 'follower', my_follower_user_path(id: current_user.id) %>
+    </li>
+  </ul>
+  <ul class="list-group">
+    <li class="list-group-item">
+    <span class="badge"><%= @my_playlists_amount %></span>
+    <%= link_to '自分の作成したプレイリスト一覧', my_playlists_users_path %>
+    </li>
+    </ul>
+</div>
+  </div>
+</div>

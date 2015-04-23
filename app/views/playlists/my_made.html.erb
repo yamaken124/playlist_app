@@ -1,0 +1,14 @@
+<h2>マイページ</h2>
+
+<h3>自分の作成したプレイリスト一覧</h3>
+
+<ol>
+<% @playlist.each do |playlist| %>
+  <li>
+    <%= link_to playlist.title, playlist_path(:id => playlist.id) %>
+    <%= link_to 'Edit', edit_playlist_path(:id => playlist.id) %>
+    <%= link_to 'Desroy', playlist_path(:id => playlist.id), method: :delete, data: {confirm: "Are you sure?"} %>
+  </li>
+<% end %>
+</ol>
+<br />

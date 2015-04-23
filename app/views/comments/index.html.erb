@@ -1,0 +1,32 @@
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>コメント内容</th>
+      <th>ユーザー名</th>
+      <th>投稿日時</th>
+    </tr>
+  </thead>
+  <% i = 0 %>
+  <% @comments.each do |comment| %>
+    <tbody>
+      <tr>
+        <td>
+          <%= comment.content %>
+        </td>
+        <td>
+          <%= link_to @user_name_array[i], user_path(id: @comment_user_ids[i]) %>
+        </td>
+        <td>
+          <% create_time = comment.created_at %>
+          <%= create_time.strftime("%Y-%m-%d %H:%M:%S") %>
+        </td>
+        <td>
+          <% if current_user.id == @comment_user_ids[i] %><br />
+            <%= link_to '削除', playlist_comment_path(:playlist_id => @playlist.id, :id => comment.id), method: :delete, data: {:confirm => "Are you sure?"}, remote: true, id: "comment_destroy", class: "btn btn-warning btn-xs" %>
+          <% end %>
+          <% i += 1 %>
+        </td>
+      </tr>
+    </tbody>
+  <% end %>
+</table>

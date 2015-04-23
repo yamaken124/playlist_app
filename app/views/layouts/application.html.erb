@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>Music Cafe</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+
+    <% if flash[:alert] %>
+      <div class="alert alert-dismissible alert-warning">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <h4>Warning!</h4>
+        <p><%= flash[:alert] %></p>
+      </div>
+    <% end %>
+
+
+    <% if flash[:notice] %>
+      <div class="alert alert-dismissible alert-success">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <h4>Notice!</h4>
+        <p><%= flash[:notice] %></p>
+      </div>
+    <% end %>
+
+      <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: "btn btn-link btn-xs pull-right" %>
+      <%= link_to 'Edit your profile', edit_user_registration_path, class: "btn btn-link btn-xs pull-right" %><br />
+
+    <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" aria-expanded="false" style="height: 1px;">
+        <ul class="nav navbar-nav">
+          <li>
+          <%= link_to '新着プレイリスト', playlists_path %> 
+          </li>
+          <li>
+          <%= link_to 'タイムライン', timeline_playlists_path %>
+          </li>
+          <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">ジャンル<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li>
+            <%= link_to 'Pops', each_genre_playlists_path(:id => 0) %>
+            </li>
+            <li>
+            <%= link_to 'Rock', each_genre_playlists_path(:id => 1) %>
+            </li>
+            <li>
+            <%= link_to 'Jazz', each_genre_playlists_path(:id => 2) %>
+            </li>
+            <li>
+            <%= link_to 'Classic', each_genre_playlists_path(:id => 3) %>
+            <li>
+            <%= link_to 'Others', each_genre_playlists_path(:id => 4) %>
+            </li>
+          </ul>
+          </li>
+          <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">ランキング<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li>
+            <%= link_to '総合ランキング', ranking_playlists_path %>
+            </li>
+            <li class="divider">Date</li>
+            <li>
+            <li>
+            <%= link_to '本日のランキング', ranking_playlists_path(date: "today") %>
+            </li>
+            <li>
+            <%= link_to '週間ランキング', ranking_playlists_path(date: "week") %>
+            </li>
+            <li>
+            <%= link_to '月間ランキング', ranking_playlists_path(date: "month") %>
+            </li>
+            <li class="divider">Genre</li>
+            <li>
+            <%= link_to 'Pops Top10', ranking_playlists_path(genre: "pops") %>
+            </li>
+            <li>
+            <%= link_to 'Rock Top10', ranking_playlists_path(genre: "rock") %>
+            </li>
+            <li>
+            <%= link_to 'Jazz Top10', ranking_playlists_path(genre: "jazz") %>
+            </li>
+            <li>
+            <%= link_to 'Classic Top10', ranking_playlists_path(genre: "classic") %>
+            </li>
+            <li>
+            <%= link_to 'Others Top10', ranking_playlists_path(genre: "others") %>
+            </li>
+          </ul>
+          </li>
+          <li>
+          <%= link_to 'お気に入り一覧', my_favorites_users_path %>
+          </li>
+          <li>
+          <%= link_to 'マイページ', mypage_users_path %>
+          </li>
+        </div>
+      </div>
+
+
+      <style>
+        header.jumbotron {
+          background-image: url(/assets/cafe.image1.jpg);
+          background-position: center center;
+          background-size: cover;
+          color: #fff;
+        }
+
+        header .container {
+          margin-top: 13%;
+        }
+
+      </style>
+
+    </head>
+    <body>
+
+      <header class="jumbotron">
+      <div class="container">
+        <h1>Music Cafeへようこそ</h1>
+      </div>
+      </header>
+
+      <div class="container-fluid">
+        <%= yield %>
+        <br />
+        <%= link_to 'プレイリストを作る', new_playlist_path, class: "btn btn-primary" %>
+        <br />
+        <%= link_to 'Topへ戻る', playlists_path, class: "btn btn-link" %>
+
+      </div>
+    </body>
+  </html>

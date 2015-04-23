@@ -1,0 +1,13 @@
+<%= form_for [@playlist, @playlist.comments.build], :remote => true do |f| %>
+  <fieldset>
+    <legend>Comment</legend>
+    <div class="form-group">
+      <div class="col-lg-10">
+        <%= f.text_area :content, class: "form-control", placeholder: "Comment"  %>
+        <%= f.hidden_field :playlist_id, :value => @playlist.id %>
+        <%= f.hidden_field :user_id, :value => current_user.id %>
+        <%= f.submit :value => "Send Comment", class: "btn btn-primary btn-xs" %>
+      </div>
+    </div>
+  </fieldset>
+<% end %>

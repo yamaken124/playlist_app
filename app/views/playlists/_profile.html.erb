@@ -1,0 +1,35 @@
+<div>
+  名前：<br />
+  <%= @user.name %><br />
+</div>
+
+<div>
+  性別：<br />
+  <%= @user.gender %><br />
+</div>
+
+<div>
+  <% if @user.bd_open %>
+    年齢：<br />
+    <% d1 = @user.birth_date.strftime("%Y%m%d").to_i %>
+    <% d2 = Date.today.strftime("%Y%m%d").to_i %>
+    <%= (d2 - d1)/10000 %>歳
+  <% else %>
+    非公開
+  <% end %><br />
+</div>
+
+<div>
+  好きな音楽のジャンル：<br />
+  <%= @user.fav_music_genre %><br />
+</div>
+
+<div>
+  自己紹介：<br />
+  <%= @user.comment %>
+</div>
+
+<div>
+  <%= link_to 'follow', playlists_path %>
+  <%= link_to 'follower', playlists_path %>
+</div>

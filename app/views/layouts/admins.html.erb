@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BlogApp</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+
+  <div>
+    <% if flash[:notice] %>
+      <%= flash[:notice] %>
+    <% end %>
+  </div>
+
+  <div>
+    <% if flash[:alert] %>
+      <%= flash[:alert] %>
+    <% end %>
+  </div>
+
+  <%= link_to 'Admin Sign out', destroy_admin_session_path, method: :delete %>
+  <%= link_to 'Edit your profile', edit_admin_registration_path %><br />
+  <%= link_to '新着プレイリスト', admin_playlists_path %>
+  <%= link_to 'ジャンル', admin_genre_playlists_path %>
+  <%= link_to 'ランキング', ranking_admin_playlists_path %>
+  <%= link_to 'お気に入り一覧', all_fav_admin_playlists_path %>
+  <%= link_to 'マイページ', mypage_admin_user_infos_path %>
+</head>
+<body>
+
+<%= yield %>
+<br />
+<%= link_to 'Topへ戻る', admin_playlists_path %>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<h2 id="title" value="<%= @playlist.id%>">Title : <%= @playlist.title %></h2>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-5">
+      <div class="panel panel-default">
+        <div class="panel-heading">Making User</div>
+        <div class="panel-body">
+          <%= link_to @user.name, admin_user_path(:id => @user.id), id: :user %>
+          <%= link_to 'ユーザー削除', admin_user_path(id: @user.name), method: :delete, data: {:confirm => "Are you sure?"}, id: "comment_destroy", class: "btn btn-warning btn-xs" %>
+        </div>
+
+        <div class="panel-heading">Genre</div>
+        <div class="panel-body">
+          <%= @playlist.genre %>
+        </div>
+
+        <div class="panel-heading">Comment from Making User</div>
+        <div class="panel-body">
+          <%= @playlist.comment %>
+        </div>
+      </div>
+
+      <br />
+
+      <div id="comments">
+        <table class="table table-striped table-hover ">
+          <thead>
+            <tr>
+              <th>コメント内容</th>
+              <th>ユーザー名</th>
+              <th>投稿日時</th>
+            </tr>
+          </thead>
+          <% i = 0 %>
+          <% @comments.each do |comment| %>
+            <tbody>
+              <tr>
+                <td>
+                  <%= comment.content %>
+                </td>
+                <td>
+                  <%= link_to @user_name_array[i], admin_user_path(id: @comment_user_ids[i]) %>
+                </td>
+                <td>
+                  <% create_time = comment.created_at %>
+                  <%= create_time.strftime("%Y-%m-%d %H:%M:%S") %>
+                </td>
+                <td>
+                  <%= link_to 'コメント削除', admin_playlist_comment_path(:playlist_id => @playlist.id, :id => comment.id), method: :delete, data: {:confirm => "Are you sure?"},  id: "comment_destroy", class: "btn btn-warning btn-xs" %>
+                  <% i += 1 %>
+                </td>
+              </tr>
+            </tbody>
+          <% end %>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="col-sm-7">
+
+      <% if @http.nil? %>
+        <h4>プレイリストに曲が登録されていません。</h4>
+      <% else %>
+        <h4>プレイリストの曲詳細</h4>
+        <table class="table table-striped table-hover ">
+          <thead>
+            <tr>
+              <th>曲順</th>
+              <th>タイトル</th>
+            </tr>
+          </thead>
+          <% i = 0 %>
+          <% @musics.each do |music| %>
+            <tbody>
+              <tr>
+                <td>
+                  <%= i += 1 %>曲目
+                </td>
+                <td>
+                  <%= music.title %>
+                </td>
+              </tr>
+            </tbody>
+          <% end %>
+        </table>
+        <iframe width="560" height="315" src=<%= @http %> frameborder="0" allowfullscreen>  
+        </iframe>
+      <% end %>
+
+      <div>
+        <%= link_to "プレイリスト削除", admin_playlist_path(id: @playlist.id), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>
+      </div>
+
+    </div>
+  </div>
+</div>

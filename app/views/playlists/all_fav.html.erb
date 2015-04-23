@@ -1,0 +1,13 @@
+<h2>お気に入り一覧</h2>
+
+<div>
+  <ol>
+    <% @favorite.each do |favorite| %>
+      <li>
+        <% @fav_playlist = @playlist.find_by(:id => favorite.playlist_id) %>
+        <%= link_to @fav_playlist.title, playlist_path(favorite.playlist_id) %>
+        <%= link_to 'お気に入りから削除', remove_fav_playlist_path(:id => @fav_playlist.id), method: :delete, data: {confirm: "Are you sure?"} %>
+      </li>
+    <% end %>
+  </ol>
+</div>

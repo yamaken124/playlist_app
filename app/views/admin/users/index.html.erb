@@ -1,0 +1,41 @@
+<h2>ユーザー一覧</h2>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-5">
+      <table class="table table-striped table-hover ">
+        <thead>
+          <tr>
+            <th>ユーザー名</th>
+            <th>Follow数</th>
+            <th>Follower数</th>
+            <th>プレイリスト数</th>
+          </tr>
+        </thead>
+        <% i = 0 %>
+        <% @users.each do |user|%>
+          <tbody>
+            <tr>
+              <td>
+                <%= link_to user.name, admin_user_path(id: user.id) %>
+              </td>
+              <td>
+                <%= @follower_amount_array[i] %>
+                </td>
+              <td>
+                <%= @followed_amount_array[i] %>
+                </td>
+                <% i += 1 %>
+                <td>
+                  <%= user.playlists.count %>
+                  </td>
+              <td>
+    <%= link_to '削除', admin_user_path(id: user.id), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-warning" %>
+    </td>
+            </tr>
+          </tbody>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

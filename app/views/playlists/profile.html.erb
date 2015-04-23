@@ -1,0 +1,12 @@
+<h2>プロフィール</h2>
+
+<%= render 'profile' %>
+
+<h3>新着プレイリスト</h3>
+<ol>
+  <% @playlist.each do |playlist| %>
+    <li>
+      <%= link_to playlist.title, playlist_path(playlist.id) %>
+    </li>
+  <% end %>
+</ol>

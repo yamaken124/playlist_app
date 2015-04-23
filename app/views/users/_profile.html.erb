@@ -1,0 +1,40 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">名前</div>
+        <div class="panel-body">
+          <%= @user.name %>
+        </div>
+        <div class="panel-heading">プロフィール写真</div>
+        <div class="panel-body">
+      <% if @user.image? %>
+        <%= image_tag @user.image.normal.url %>
+      <% else %>
+        <%= image_tag 'noimage.gif' %>
+      <% end %>
+        </div>
+        <div class="panel-heading">性別</div>
+        <div class="panel-body">
+          <%= @user.gender %>
+        </div>
+        <div class="panel-heading">年齢</div>
+        <div class="panel-body">
+          <% if @user.bd_open %>
+            年齢：
+            <% d1 = @user.birth_date.strftime("%Y%m%d").to_i %>
+            <% d2 = Date.today.strftime("%Y%m%d").to_i %>
+            <%= (d2 - d1)/10000 %>歳
+          <% else %>
+            非公開
+          <% end %><br />
+        </div>
+        <div class="panel-heading">好きな音楽のジャンル</div>
+        <div class="panel-body">
+          <%= @user.fav_music_genre %><br />
+        </div>
+        <div class="panel-heading">自己紹介</div>
+        <div class="panel-body">
+          <%= @user.comment %>
+        </div>
+      </div>

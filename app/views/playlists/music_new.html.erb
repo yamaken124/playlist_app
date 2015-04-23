@@ -1,0 +1,95 @@
+<h2>曲の登録</h2>
+
+<h4>プレイリスト情報</h4>
+タイトル：
+<%= @playlist.title %>
+<br>
+作者からのコメント：
+<%= @playlist.comment %>
+<br>
+登録された曲一覧：
+<div>
+<% if @musics.nil? %>
+  まだ登録されていません。
+<% else %>
+  <% @musics.each do |music| %>
+    <li>
+      Music Title : 
+      <%= music.title %>
+      <% if params[:nextPageToken].nil? %>
+      <% @pageToken = params[:nextPageToken] %>
+    <% elsif %>
+      <% @pageToken = params[:prevPageToken] %>
+    <% else %>
+      <% @pageToken = nil %>
+    <% end %>
+      <%= link_to 'プレイリストから外す', music_destroy_playlist_path(id: @playlist.id, music_id: music.id, keyword: @keyword, pageToken: @pageToken), method: :delete, data: {confirm: "Are you sure?"} %>
+      <div>
+      <iframe width="160" height="90" src="https://www.youtube.com/embed/<%= music.url %>" frameborder="0" allowfullscreen> 
+      </iframe>
+      </div>
+
+      <br>
+ 
+      </li>
+    <% end %>
+<% end %>
+</div>
+
+<div>
+  <%= link_to 'プレイリスト作成を終了する', playlist_path(id: @playlist.id) %>
+</div>
+
+<br>
+
+<div>
+  <%= form_tag({controller: "playlists", action: "search", id: @playlist.id}) do |f| %>
+    <%= label_tag "search[keyword]" %>
+    <%= text_field_tag "search[keyword]" %>
+    <%= submit_tag "検索"%>
+  <% end %>
+</div>
+
+<br>
+<div>
+  『<%= params[:keyword] %>』の検索結果
+  </div>
+
+  <br>
+
+<div>
+  <%= link_to '前の20件', music_new_playlist_path(id: @playlist.id, keyword: @keyword, prevPageToken: @prevPageToken) unless @prevPageToken.nil? %>
+  <%= link_to '最初の20件', music_new_playlist_path(id: @playlist.id, keyword: @keyword) %>
+  <%= link_to '次の20件', music_new_playlist_path(id: @playlist.id, keyword: @keyword, nextPageToken: @nextPageToken) unless @nextPageToken.nil? %>
+  </div>
+
+<br>
+
+<% @all_response.each do |response| %>
+  <div>
+    タイトル：
+    <%= @title = response["snippet"]["title"] %>
+    <br>
+    <% @video_id = response["id"]["videoId"] %>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= @video_id %>" frameborder="0" allowfullscreen> 
+    </iframe>
+    <%= form_for @music, url: {controller: :playlists, action: :music_create} do |f| %>
+      <%= f.hidden_field :playlist_id, value: @playlist.id %>
+      <%= f.hidden_field :video_id, value: @video_id%>
+      VideoId
+      <%= @video_id%>
+      <%= f.hidden_field :title, value: @title%>
+      <%= f.hidden_field :pageToken, value: params[:pageToken] unless params[:pageToken] %>
+      <%= f.hidden_field :keyword, value: params[:keyword] unless params[:keyword] %>
+      <% if @musics.find_by(url: @video_id).blank? %>
+      <%= f.submit "プレイリストに追加" %>
+      <% else %>
+        この曲は既にプレイリストに登録されています。
+    <% end %>
+    <% end %>
+  </div>
+<% end %> 
+
+<div>
+  <%= link_to 'プレイリスト作成を終了する', playlist_path(id: @playlist.id) %>
+</div>

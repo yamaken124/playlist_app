@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Music Cafe For Admin</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+
+    <% if flash[:alert] %>
+      <div class="alert alert-dismissible alert-warning">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <h4>Warning!</h4>
+        <p><%= flash[:alert] %></p>
+      </div>
+    <% end %>
+
+
+    <% if flash[:notice] %>
+      <div class="alert alert-dismissible alert-success">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <h4>Notice!</h4>
+        <p><%= flash[:notice] %></p>
+      </div>
+    <% end %>
+
+    <div class="btn-group">
+    <%= link_to 'Admin Sign out', destroy_admin_session_path, method: :delete, class: "btn btn-link btn-xs pull-right" %>
+    </div>
+
+    <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" aria-expanded="false" style="height: 1px;">
+        <ul class="nav navbar-nav">
+          <li>
+          <%= link_to 'プレイリスト一覧', admin_playlists_path %>
+          </li>
+          <li>
+          <%= link_to 'ユーザー一覧', admin_users_path %>
+          </li>
+        </ul>
+      </div>
+    </div>
+    </nav>
+
+
+    <style>
+      header.jumbotron {
+        background-image: url(/assets/cafe.image1.jpg);
+        background-position: center center;
+        background-size: cover;
+        color: #fff;
+      }
+
+      header .container {
+        margin-top: 13%;
+      }
+
+    </style>
+
+  </head>
+  <body>
+
+    <header class="jumbotron">
+    <div class="container">
+      <h1>Music Cafe For Admin</h1>
+    </div>
+    </header>
+
+    <div class="container-fluid">
+      <%= yield %>
+    </div>
+
+  </body>
+</html>
