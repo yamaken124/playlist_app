@@ -33,15 +33,8 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show] do
     resources :relationships, only: [:create, :destroy]
-    collection do
-      get :my_favorites
-      get :my_playlists
-      get :mypage
-    end
     member do
       get :favorites
-      get :my_follow
-      get :my_follower
       get :follow
       get :follower
     end
