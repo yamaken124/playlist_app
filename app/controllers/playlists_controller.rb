@@ -25,8 +25,12 @@ class PlaylistsController < UsersController
     ### 変数多い
     #viewで使わない変数は＠をつけない
     @status = Relationship.where(follower_id: current_user.id, followed_id: @playlist.user.id).present?
-    favorite = Favorite.new(playlist_id: params[:id], user_id: current_user.id)
-    @condition = favorite.already_fav?
+    favorite = Favorite.find_by(playlist_id: params[:id], user_id: current_user.id)
+    if favorite.present?
+      @condition = true
+    else
+      @condition = false
+    end
     #インスタンスメソッドとレシーバを意識して、ここのメソッドを修正
     music = Music.new(playlist_id: params[:id])
     @http = music.movie_http
