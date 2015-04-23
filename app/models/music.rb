@@ -1,7 +1,8 @@
 class Music < ActiveRecord::Base
+  belongs_to :playlist
 
   #クラスメソッドでここはやるべき
-  def http
+  def movie_http
       musics = Music.where(playlist_id: self.playlist_id)
     if musics.count == 1
       youtube_id = musics.first.url
