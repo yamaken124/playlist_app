@@ -11,14 +11,12 @@
           <th>更新日時</th>
         </tr>
       </thead>
-      <% i = 0 %>
       <% @playlists.each do |playlist| %>
         <tbody>
           <tr>
             <td>
-              <%= link_to @user_name_array[i], user_path(id: @playlist_user_ids[i]) %>
+              <%= link_to playlist.user.name, user_path(id: playlist.user.id) %>
             </td>
-            <% i += 1 %>
             <td>
               <%= link_to playlist.title, playlist_path(id: playlist.id) %>
             </td>

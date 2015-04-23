@@ -52,12 +52,11 @@
           <tbody>
             <tr>
               <td>
-                <%= num = i + 1 %>位
+                <%= i += 1 %>位
                 </td>
               <td>
-                <%= link_to @user_name_array[i], user_path(id: @playlist_user_ids[i]) %>
+                <%= link_to playlist.user.name, user_path(id: playlist.user.id) %>
                 </td>
-              <% i += 1 %>
               <td>
                 <%= link_to playlist.title, playlist_path(id: playlist.id) %>
                 </td>

@@ -11,18 +11,11 @@ class UsersController < ApplicationController
     @playlists = Playlist.where(user_id: params[:id])
     @status = Relationship.where(follower_id: current_user.id, followed_id: params[:id]).present?
     @follower_amount = Relationship.where(follower_id: params[:id]).count
-    p @followed_amount = Relationship.where(followed_id: params[:id]).count
   end
 
   def favorites
     favorites = Favorite.where(user_id: params[:id]).pluck(:playlist_id)
     @playlists = Playlist.where(id: favorites)
-    @playlist_user_ids = @playlists.pluck(:user_id)
-    @user_name_array = Array.new
-    @playlist_user_ids.each do |user_id|
-      user_name = User.find(user_id).name
-      @user_name_array << user_name
-    end
   end
 
   def make_follow

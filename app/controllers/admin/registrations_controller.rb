@@ -1,4 +1,5 @@
 class Admin::RegistrationsController < Devise::RegistrationsController
+    layout "top_page"
 
   def new
     super

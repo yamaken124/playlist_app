@@ -25,9 +25,7 @@ class MusicsController < ApplicationController
     @playlist = Playlist.find(params[:playlist_id])
     @music = Music.new
     @musics = Music.where(playlist_id: params[:playlist_id])
-    p @musics
     @musics_urls = @musics.pluck(:url)
-    p @musics_urls
   end
 
   def search
@@ -55,7 +53,6 @@ class MusicsController < ApplicationController
   end
 
   def search_params
-    p params
     params.require(:search).permit(:keyword)
   end
 
