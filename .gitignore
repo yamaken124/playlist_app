@@ -12,7 +12,8 @@
 !/log/.keep
 /tmp
 /vendor/bundle
-/config/settings.yml
+/config/settings.local.yml
+/config/*.local*
 
 *.swp
 *.swap
