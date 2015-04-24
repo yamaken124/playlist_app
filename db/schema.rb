@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150423075928) do
+ActiveRecord::Schema.define(version: 20150423110439) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -118,7 +118,6 @@ ActiveRecord::Schema.define(version: 20150423075928) do
   add_foreign_key "comments", "playlists", on_delete: :cascade
   add_foreign_key "comments", "users", on_delete: :cascade
   add_foreign_key "favorites", "playlists", on_delete: :cascade
-  add_foreign_key "favorites", "users"
   add_foreign_key "musics", "playlists", on_delete: :cascade
   add_foreign_key "playlists", "users", on_delete: :cascade
 end

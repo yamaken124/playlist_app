@@ -34,5 +34,16 @@ module BlogApp
       Devise::UnlocksController.layout "top_page"
       Devise::PasswordsController.layout "top_page"
     end
+
+    config.generators do |g|
+      g.test_framework :rspec,
+        fixtures: true,
+        view_specs: false,
+        helper_specs: false,
+        routing_specs: false,
+        controller_spec: true,
+        request_specs: false
+      g.fixture_replacement :factory_girl, dir: "spec/factories"
+    end
   end
 end
