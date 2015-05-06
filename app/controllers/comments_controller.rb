@@ -1,5 +1,5 @@
 class CommentsController < UsersController
-  before_action :authenticate_user!
+#  before_action :authenticate_user!
 
   def index
     @playlist = Playlist.find_by(id: params[:playlist_id])

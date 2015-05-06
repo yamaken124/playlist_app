@@ -7,7 +7,7 @@ class PlaylistsController < UsersController
     ranking_playlists_path
   end
 
-  before_action :authenticate_user!, except: :top_page
+#  before_action :authenticate_user!, except: :top_page
   before_action :set_playlist, only: [:show, :edit, :update, :destroy]
 
   def top_page
@@ -34,6 +34,8 @@ class PlaylistsController < UsersController
     #インスタンスメソッドとレシーバを意識して、ここのメソッドを修正
     music = Music.new(playlist_id: params[:id])
     @http = music.movie_http
+=begin
+=end
   end
 
   def new
@@ -43,9 +45,11 @@ class PlaylistsController < UsersController
   def create
     playlist = Playlist.new(playlist_params)
     if playlist.save
-      redirect_to my_playlists_users_path
+      redirect_to playlists_path
     else
+=begin
       flash[:alert] = "Title can't be blank."
+=end
       render :new
     end
   end
@@ -72,6 +76,7 @@ class PlaylistsController < UsersController
     follows = Relationship.where(follower_id: current_user.id).pluck(:followed_id)
     @follows = User.where(id: follows)
     @playlists = Playlist.where(user_id: follows).order("updated_at DESC").limit(20)
+    p @playlists
   end
 
   def genre
