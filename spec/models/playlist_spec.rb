@@ -1,6 +1,26 @@
 require 'spec_helper'
 
 describe Playlist do
+  # 有効なファクトリを持つこと
+  it "has a valid factory" do
+    expect(build(:playlist)).to be_valid
+  end
+
+  # commentsとのassociationがしっかりできていること
+  it "has an association with comments" do
+    expect(create(:playlist).comments).to exist
+  end
+
+  # favoritesとのassociationがしっかりできていること
+  it "has an association with favorites" do
+    expect(create(:playlist).favorites).to exist
+  end
+
+  # musicsとのassociationがしっかりできていること
+  it "has an association with musics" do
+    expect(create(:playlist).musics).to exist
+  end
+
   # タイトルとユーザーIDがあれば有効な状態であること
   it "is valid with a title, user_id" do
     playlist = Playlist.new(
@@ -12,9 +32,5 @@ describe Playlist do
   # タイトルがなければ無効な状態=バリデーション
   it "is invalid without a title" do
     expect(Playlist.new(title: nil)).to have(1).errors_on(:title)
-  end
-  # ユーザーIDがなければ無効な状態=バリデーション
-  it "is invalid without a user_id" do
-    expect(Playlist.new(user_id: nil)).to have(1).errors_on(:user_id)
   end
 end

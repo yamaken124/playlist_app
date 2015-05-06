@@ -4,7 +4,13 @@ class Playlist < ActiveRecord::Base
   has_many :favorites
   has_many :musics
   enum genre: %i(pops rock jazz classic others)
-  validates :title, presence: true
+  validates :title, presence: true, if: :equal?
+  
+  def equal?
+    params[:title] == "ajo"
+  end
+
+                     
 
   def self.ranking(date, genre)
     if date.present?

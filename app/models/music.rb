@@ -1,5 +1,6 @@
 class Music < ActiveRecord::Base
   belongs_to :playlist
+  validates :url, presence: true
 
   #クラスメソッドでここはやるべき
   def movie_http

@@ -5,6 +5,10 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :playlists
   has_many :comments
+  validates :name, presence: true
+  validates :birth_date, presence: true
+  validates :bd_open, presence: true
+  validates :gender, presence: true
 
   # あなたがフォロー
   # has_many :relationships, :dependent => :destroy
