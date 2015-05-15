@@ -76,7 +76,6 @@ class PlaylistsController < UsersController
     follows = Relationship.where(follower_id: current_user.id).pluck(:followed_id)
     @follows = User.where(id: follows)
     @playlists = Playlist.where(user_id: follows).order("updated_at DESC").limit(20)
-    p @playlists
   end
 
   def genre

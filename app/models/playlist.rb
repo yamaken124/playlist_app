@@ -1,16 +1,12 @@
 class Playlist < ActiveRecord::Base
+  attr_accessor :title, :comment, :genre, :count_fav
   belongs_to :user
   has_many :comments
   has_many :favorites
   has_many :musics
   enum genre: %i(pops rock jazz classic others)
-  validates :title, presence: true, if: :equal?
+  validates :title, presence: true
   
-  def equal?
-    params[:title] == "ajo"
-  end
-
-                     
 
   def self.ranking(date, genre)
     if date.present?
