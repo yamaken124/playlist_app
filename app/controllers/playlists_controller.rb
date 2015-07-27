@@ -21,9 +21,6 @@ class PlaylistsController < UsersController
   def show
     @playlist = Playlist.find(params[:id])
     @comments = Comment.where(playlist_id: params[:id])
-    ## @user_ids をわかりやすい命名に
-    ### 変数多い
-    #viewで使わない変数は＠をつけない
     @status = Relationship.where(follower_id: current_user.id, followed_id: @playlist.user.id).present?
     favorite = Favorite.find_by(playlist_id: params[:id], user_id: current_user.id)
     if favorite.present?
@@ -31,11 +28,8 @@ class PlaylistsController < UsersController
     else
       @condition = false
     end
-    #インスタンスメソッドとレシーバを意識して、ここのメソッドを修正
     music = Music.new(playlist_id: params[:id])
     @http = music.movie_http
-=begin
-=end
   end
 
   def new
@@ -47,9 +41,6 @@ class PlaylistsController < UsersController
     if playlist.save
       redirect_to playlists_path
     else
-=begin
-      flash[:alert] = "Title can't be blank."
-=end
       render :new
     end
   end
@@ -67,8 +58,8 @@ class PlaylistsController < UsersController
   end
 
   def destroy
-    @playlist = Playlist.find(params[:id])
-    @playlist.destroy
+    playlist = Playlist.find(params[:id])
+    playlist.destroy
     redirect_to playlists_path
   end
 
