@@ -6,6 +6,8 @@ describe Playlist do
     expect(build(:playlist)).to be_valid
   end
 
+  ## associationはつけないことにしたので
+=begin
   # commentsとのassociationがしっかりできていること
   it "has an association with comments" do
     expect(create(:playlist).comments).to exist
@@ -20,6 +22,7 @@ describe Playlist do
   it "has an association with musics" do
     expect(create(:playlist).musics).to exist
   end
+=end
 
   # タイトルとユーザーIDがあれば有効な状態であること
   it "is valid with a title, user_id" do

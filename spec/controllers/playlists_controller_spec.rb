@@ -12,10 +12,10 @@ describe PlaylistsController do
 =end
 
   before do
-    @user = User.first
+    @current_user = User.first
     allow(controller)
     .to receive(:current_user)
-    .and_return(@user)
+    .and_return(@current_user)
   end
 
   describe 'GET #top_page' do
@@ -77,7 +77,6 @@ describe PlaylistsController do
     context "with valid attributes" do
       # データベースに新しいplaylistを保存すること
       it "saves the new playlist in the database" do
-        p @playlist
         expect{
           post :create, playlist: attributes_for(:playlist)
         }.to change(Playlist, :count).by(1)
@@ -109,9 +108,11 @@ describe PlaylistsController do
   end
 
   describe 'PATCH #update' do
+=begin
     before :each do
       @playlist = create(:playlist, title: "jazz", user_id: 1, comment: "jajaja", genre: 2, count_fav: 5)
     end
+=end
     # 有効な属性の場合
     context "with valid attributes" do
       # データベースのplaylistを更新すること
@@ -157,16 +158,14 @@ describe PlaylistsController do
 
   describe 'GET #timeline' do
     before :each do
-      @user = create(:user, id: 2)
-      @relationship = create(:relationship, follower_id: 1, followed_id: 2)
-      @playlist = create(:playlist, user_id: 2)
+      @user = create(:user, id: 3)
+      @playlist = create(:playlist, user_id: 3)
+      @relationship = create(:relationship, follower_id: @current_user.id, followed_id: 3)
     end
 
     # playlistを配列で返す
     it "populates array of playlists" do
-      p @playlist
       get :timeline
-      p assigns(:playlists)
       expect(assigns(:playlists)).to eq [@playlist]
     end
     # :timelineテンプレートを表示すること
