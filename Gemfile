@@ -16,13 +16,16 @@ end
 
 
 
+# 7/27 remove bootstrap from this app
 # 4/16 install for bootstrap 楽したい
-gem 'twitter-bootswatch-rails', '~> 3.1.1'
-gem 'twitter-bootswatch-rails-helpers'
+# gem 'twitter-bootswatch-rails', '~> 3.1.1'
+# gem 'twitter-bootswatch-rails-helpers'
 
 # 4/16 install for bootstrap
 gem 'less-rails'
-gem 'twitter-bootstrap-rails'
+# 7/27 remove bootstrap from this app
+# gem 'twitter-bootstrap-rails'
+
 # 4/9 install for comment by ajax
 gem 'jquery-turbolinks'
 
